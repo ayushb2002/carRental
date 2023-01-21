@@ -1,3 +1,9 @@
+<?php
+
+session_start();
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -25,7 +31,23 @@
                             <br>
                             <span class="display-subhead">Helping you rent a car easily</span>
                             <br><br>
-                            <a href="viewCars.php"><button class="btn btn-primary">Rent a ride now</button></a>
+                            <?php
+                            if(isset($_SESSION['loginSuccess']))
+                            {
+                                if($_SESSION['agency'] == 0)
+                                {
+                                    ?>
+                                        <a href="viewCars.php"><button class="btn btn-primary">Rent a ride now</button></a>
+                                    <?php
+                                }
+                            }
+                            else
+                            {
+                                ?>
+                                    <a href="viewCars.php"><button class="btn btn-primary">Rent a ride now</button></a>
+                                <?php
+                            }
+                            ?>
                         </div>
                     </div>
                 </div>

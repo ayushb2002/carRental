@@ -8,7 +8,7 @@
     min-height: 100vh;
 }
 
-.register-form-section, .login-form-section, .register-car-form-section
+.register-form-section, .login-form-section, .register-car-form-section, .edit-cars-section
 {
     min-height: 90vh;
     overflow: hidden;
@@ -69,4 +69,17 @@
 .display-block
 {
     display: block !important;
+}
+
+.card-number-form-container
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.car-number-form
+{
+    width: 50vw;
+    padding: 5%;
 }

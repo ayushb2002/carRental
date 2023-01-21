@@ -1,3 +1,20 @@
+<?php
+
+session_start();
+
+if(isset($_SESSION['loginSuccess']))
+{
+    if($_SESSION['agency'] == 1)
+    {
+        header('Location: ../carRental/404.php');
+    }
+}   
+
+include 'query/returnCars.php';
+$result = returnCars();
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -23,17 +40,21 @@
                 </div>
                 <div class="col-12">
                     <div class="row">
+                        <?php
+                               if ($result->num_rows > 0) {
+                                while($row = $result->fetch_assoc()) {
+                        ?>
                         <!-- Card starts -->
                         <div class="col-lg-6 col-sm-12">
                             <div class="card mb-3" style="width:100%">
                                 <div class="row g-0">
                                     <div class="col-md-4">
-                                        <img src="https://picsum.photos/500/700" class="img-fluid rounded-start"
+                                        <img src="https://picsum.photos/500/800" class="img-fluid rounded-start"
                                             alt="picsum">
                                     </div>
                                     <div class="col-md-8">
                                         <div class="card-body">
-                                            <h5 class="card-title">Ford Ecosports</h5>
+                                            <h5 class="card-title"><?php echo $row['name']; ?></h5>
                                             <div class="row g-3 align-items-center">
                                                 <div class="col-12">
                                                     <table class="table">
@@ -45,18 +66,26 @@
                                                         </thead>
                                                         <tbody>
                                                             <tr>
-                                                                <td>Ecosports</td>
-                                                                <td>DL00000000</td>
-                                                                <td>5</td>
-                                                                <td>Rs. 1000/day</td>
+                                                                <td><?php echo $row['model']; ?></td>
+                                                                <td><?php echo $row['number']; ?></td>
+                                                                <td><?php echo $row['capacity']; ?></td>
+                                                                <td>Rs. <?php echo $row['rent']; ?>/day</td>
                                                             </tr>
                                                         </tbody>
                                                     </table>
                                                 </div>
-                                                <form action="#" method="POST">
+
+                                                <?php
+
+                                                if(isset($_SESSION['loginSuccess']))
+                                                {
+                                                ?>
+                                                <form action="query/dbLeased.php" method="POST">
+                                                    <input type="hidden" name="agency" value="<?php echo $row['agency'] ?>">
+                                                    <input type="hidden" name="vehicleNumber" value="<?php echo $row['number'] ?>">
                                                 <div class="col-12 form-group mb-3">
                                                     <label class="form-label">Enter number of days to rent the car</label>
-                                                    <select class="form-select">
+                                                    <select class="form-select" name="days">
                                                         <option selected disabled>0</option>
                                                         <option value="1">1</option>
                                                         <option value="2">2</option>
@@ -65,12 +94,25 @@
                                                 </div>
                                                 <div class="col-12 form-group mb-3">
                                                     <label class="form-label">Date to rent car from</label>
-                                                    <input type="date" name="rentDate" id="rentDate" class="form-control">
+                                                    <input type="date" name="rentDate" name="rentDate" class="form-control">
                                                 </div>
                                                 <div class="col-12 form-group">
-                                                    <button class="btn btn-secondary">Rent</button>
+                                                    <button class="btn btn-success">Rent this car</button>
                                                 </div>
                                                 </form>
+                                                <?php
+                                                }
+                                                else
+                                                {
+                                                    ?>
+                                                    <div class="text-center">
+                                                        <a href="login.php">
+                                                        <button class="btn btn-danger">Log in to rent this!</button>
+                                                        </a>
+                                                    </div>
+                                                    <?php
+                                                }
+                                                ?>
                                             </div>
                                         </div>
                                     </div>
@@ -78,6 +120,15 @@
                             </div>
                         </div>
                         <!-- Card ends -->
+                        <?php
+
+                            }
+                        }
+                        else
+                        {
+                            echo '<h1>No records found!</h1>';
+                        }
+                        ?>
                     </div>
                 </div>
             </div>

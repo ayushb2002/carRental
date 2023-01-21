@@ -1,3 +1,15 @@
+<?php
+    session_start();
+    if(isset($_SESSION['email']))
+    {
+        ?>
+<h1>Page not found!</h1>
+        <?php
+    }
+    else
+    {
+        include 'query/dbconnect.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -42,3 +54,6 @@
 </body>
 
 </html>
+<?php
+    }
+?>

@@ -1,6 +1,19 @@
+<?php
+
+session_start();
+
+if(isset($_SESSION['loginSuccess']))
+{
+    if($_SESSION['agency'] == 1)
+    {
+
+    include 'query/returnLease.php';
+
+    $result = returnLease();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -25,21 +38,38 @@
                     <table class="table table-striped">
                         <thead>
                             <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">Name</th>
+                                <th scope="col">Buyer</th>
                                 <th scope="col">Date of issue</th>
                                 <th scope="col">Days issued for</th>
                                 <th scope="col">Car Issued</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>Mark Otto</td>
-                                <td>January 25, 2023</td>
-                                <td>3</td>
-                                <td>Ford Ecosports</td>
-                            </tr>
+                            <?php
+                            if ($result->num_rows > 0) {
+                                while($row = $result->fetch_assoc()) {
+                                    ?>
+                                    <tr>
+                                        <td><?php echo $row['user'] ?></td>
+                                        <td><?php echo $row['date'] ?></td>
+                                        <td><?php echo $row['days'] ?></td>
+                                        <td><?php echo $row['number'] ?></td>
+                                    </tr>
+                                    <?php
+                                }
+                            }
+                            else
+                            {
+                                ?>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <?php
+                            }
+                            ?>
                         </tbody>
                     </table>
 
@@ -58,3 +88,16 @@
 </body>
 
 </html>
+
+<?php
+    }
+    else
+    {
+        header('Location: 404.php');
+    }
+}
+else
+{
+    header('Location: 404.php');
+}
+?>
