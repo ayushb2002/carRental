@@ -14,7 +14,7 @@ if($_SESSION['loginSuccess'])
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Car Rental</title>
+    <title>Car Rental | Welcome <?php echo $_SESSION['name']; ?></title>
     <!-- Styles included -->
     <?php include 'components/css.php'; ?>
 </head>
@@ -24,6 +24,33 @@ if($_SESSION['loginSuccess'])
         <?php include 'components/navbar.php'; ?>
     </section>
     <!-- Navbar Ends -->
+
+    <?php
+                    if(isset($_SESSION['addCarSuccess']))
+                    {
+                ?>
+                    <div class="build-toast">
+                        <span><?php echo $_SESSION['message']; ?></span>
+                    </div>
+                <?php
+                        unset($_SESSION['message']);
+                        unset($_SESSION['addCarSuccess']);
+                    }
+    ?>
+    
+    <?php
+                    if(isset($_SESSION['editCarSuccess']))
+                    {
+                ?>
+                    <div class="build-toast">
+                        <span><?php echo $_SESSION['message']; ?></span>
+                    </div>
+                <?php
+                        unset($_SESSION['message']);
+                        unset($_SESSION['editCarSuccess']);
+                    }
+    ?>
+
     <section class="hero-section">
         <div class="container-fluid">
             <div class="row">

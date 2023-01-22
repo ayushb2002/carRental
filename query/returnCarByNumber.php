@@ -1,6 +1,6 @@
 <?php
 
-include 'dbConnect.php';
+include 'dbconnect.php';
 
 if(!isset($_SESSION)) 
 { 

@@ -24,8 +24,10 @@ if($_POST['vehicleName'] && $_POST['vehicleModel'] && $_POST['vehicleNumber'] &&
 
     if ($conn->query($sql) === TRUE) {
         $_SESSION['addCarSuccess'] = true;
+        $_SESSION['message'] = 'Added car details successfully!';
       } else {
         $_SESSION['addCarSuccess'] = false;
+        $_SESSION['message'] = 'Failed to add car details! Kindly retry...';
       }
 
       header("Location: ../welcome.php");

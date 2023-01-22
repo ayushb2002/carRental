@@ -20,7 +20,7 @@ if($_POST['vehicleName'] && $_POST['vehicleModel'] && $_POST['vehicleNumber'] &&
         header("Location: ../404.php");
     }
 
-    $sql1 = "DELETE FROM `rent` WHERE `number`='".$_SESSION['vehicleNumber']."'";
+    $sql1 = "DELETE FROM `rent` WHERE `number`='".$_POST['vehicleNumber']."'";
         unset($_SESSION['editForm']);
         unset($_SESSION['vehicleName']);
         unset($_SESSION['vehicleModel']);
@@ -32,13 +32,16 @@ if($_POST['vehicleName'] && $_POST['vehicleModel'] && $_POST['vehicleNumber'] &&
 
     if ($conn->query($sql2) === TRUE) {
         $_SESSION['editCarSuccess'] = true;
+        $_SESSION['message'] = 'Updated car details successfully';
       } else {
         $_SESSION['editCarSuccess'] = false;
+        $_SESSION['messsage'] = 'Failed to update car details!';
       }
     }
     else
     {
         $_SESSION['editCarSuccess'] = false;
+        $_SESSION['messsage'] = 'Failed to find the car requested for!';
     }
 
       header("Location: ../welcome.php");

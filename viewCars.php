@@ -32,6 +32,20 @@ $result = returnCars();
         <?php include 'components/navbar.php'; ?>
     </section>
     <!-- Navbar Ends -->
+
+    <?php
+                    if(isset($_SESSION['rentSuccess']))
+                    {
+                ?>
+                    <div class="build-toast">
+                        <span><?php echo $_SESSION['message']; ?></span>
+                    </div>
+                <?php
+                        unset($_SESSION['message']);
+                        unset($_SESSION['rentSuccess']);
+                    }
+    ?>
+
     <section class="view-cars-section">
         <div class="container-fluid">
             <div class="row">

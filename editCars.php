@@ -51,6 +51,7 @@ if(isset($_SESSION['loginSuccess']))
                 ?>
                 <div class="col-12 p-5">
                         <form action="query/updateCarDetails.php" method="POST">
+                        <input type="hidden" name="vehicleNumber" value="<?php echo $_SESSION['vehicleNumber']; ?>">
                             <div class="mb-3 text-center">
                                 <span>Tip:- Don't change anything unless you want to update it!</span>
                             </div>
@@ -61,10 +62,6 @@ if(isset($_SESSION['loginSuccess']))
                         <div class="mb-3">
                             <label class="form-label">Vehicle Model</label>
                             <input type="text" name="vehicleModel" value="<?php echo $_SESSION['vehicleModel']; ?>" class="form-control" required>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">Vehicle Number</label>
-                            <input type="text" name="vehicleNumber" value="<?php echo $_SESSION['vehicleNumber']; ?>" class="form-control" required>
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Vehicle Capacity</label>

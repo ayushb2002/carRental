@@ -27,9 +27,11 @@ if($_POST['rentDate'] && $_POST['days'] && $_POST['agency'] && $_POST['vehicleNu
 
     if ($conn->query($sql) === TRUE) {
         $_SESSION['rentSuccess'] = true;
-        header("Location: ../welcome.php");
+        $_SESSION['message'] = 'Booked the car successfully';
+        header("Location: ../viewCars.php");
       } else {
-        $_SESSION['registerSuccess'] = false;
+        $_SESSION['rentSuccess'] = false;
+        $_SESSION['message'] = 'Failed booking!';
         header("Location: ../viewCars.php");
       }
       

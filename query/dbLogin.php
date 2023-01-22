@@ -12,6 +12,7 @@ if(isset($_POST['email']) && isset($_POST['password']))
     $conn = dbconnect();
     if(!$conn)
     {
+        $_SESSION['message'] = 'Could not connect to database!';
         header("Location: ../404.php");
     }
 
