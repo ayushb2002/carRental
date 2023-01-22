@@ -8,7 +8,6 @@
     }
     else
     {
-        include 'query/dbconnect.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -26,6 +25,21 @@
     <section class="navbar-section">
         <?php include 'components/navbar.php'; ?>
     </section>
+    <?php
+                    if(isset($_SESSION['registerSuccess']))
+                    {
+                        if(!$_SESSION['registerSuccess'])
+                        {
+                ?>
+                    <div class="build-toast">
+                        <span><?php echo $_SESSION['message']; ?></span>
+                    </div>
+                <?php
+                        }
+                        unset($_SESSION['message']);
+                        unset($_SESSION['registerSuccess']);
+                    }
+                ?>
     <section class="register-form-section">
         <div class="container-flluid">
             <div class="row">

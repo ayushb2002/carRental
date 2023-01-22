@@ -1,10 +1,13 @@
 <?php
 
-session_start();
+if(!isset($_SESSION))
+{
+  session_start();
+}
 
 include 'dbconnect.php';
 
-if($_POST['name'] && $_POST['email'] && $_POST['password'] && $_POST['agency'])
+if(isset($_POST['name']) && isset($_POST['email']) && isset($_POST['password']) && isset($_POST['agency']))
 {
     $conn = dbconnect();
     if(!$conn)
@@ -19,10 +22,17 @@ if($_POST['name'] && $_POST['email'] && $_POST['password'] && $_POST['agency'])
         header("Location: ../login.php");
       } else {
         $_SESSION['registerSuccess'] = false;
+        $_SESSION['message'] = 'Registration failed! User already exists';
         header("Location: ../register.php");
       }
       
       $conn->close();
+}
+else
+{
+  $_SESSION['registerSuccess'] = false;
+  $_SESSION['message'] = "Registration failed due to internal server error...";
+  header('Location: ../register.php');
 }
 
 ?>

@@ -20,13 +20,24 @@
         <?php
       if(isset($_SESSION['loginSuccess']))
         {
-          if($_SESSION['agency'] == 0)
+          if(isset($_SESSION['agency']))
             {
+              if($_SESSION['agency'] == 0)
+              {
           ?>
           <li class="nav-item">
             <a class="nav-link" href="viewCars.php">Available Cars</a>
           </li>
         <?php
+              }
+            }
+            else
+            {
+              ?>
+              <li class="nav-item">
+               <a class="nav-link" href="viewCars.php">Available Cars</a>
+             </li>
+               <?php
             }
           }  
           else
@@ -53,6 +64,13 @@
             <li><a class="dropdown-item" href="welcome.php">Profile</a></li>
             <li><a class="dropdown-item" href="query/logout.php">Logout</a></li>
             <?php
+              }
+              else
+              {
+                ?>
+                <li><a class="dropdown-item" href="login.php">Login</a></li>
+                <li><a class="dropdown-item" href="register.php">Register</a></li>
+                <?php
               }
             }
             else

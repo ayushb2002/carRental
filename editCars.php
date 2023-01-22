@@ -37,7 +37,7 @@ if(isset($_SESSION['loginSuccess']))
                     <form action="query/returnCarByNumber.php" method="POST" class="car-number-form">
                         <div class="mb-3">
                             <label class="form-label">Enter vehicle number</label>
-                            <input type="text" name="vehicleNumber" require class="form-control">
+                            <input type="text" name="vehicleNumber" class="form-control" required>
                         </div>
                         <div class="mb-3">
                             <button class="btn btn-success">Edit</button>

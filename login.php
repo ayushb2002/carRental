@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,6 +18,34 @@
     <section class="navbar-section">
         <?php include 'components/navbar.php'; ?>
     </section>
+    <?php
+                    if(isset($_SESSION['loginSuccess']))
+                    {
+                        if(!$_SESSION['loginSuccess'])
+                        {
+                ?>
+                    <div class="build-toast">
+                        <span>Login failed due to invalid credentials!</span>
+                    </div>
+                <?php
+                        }
+                        unset($_SESSION['loginSuccess']);
+                    }
+                ?>
+    <?php
+                    if(isset($_SESSION['registerSuccess']))
+                    {
+                        if($_SESSION['registerSuccess'])
+                        {
+                ?>
+                    <div class="build-toast">
+                        <span>Registered successfully! You can log in now...</span>
+                    </div>
+                <?php
+                        }
+                        unset($_SESSION['registerSuccess']);
+                    }
+                ?>
     <section class="login-form-section">
         <div class="container-flluid">
             <div class="row">

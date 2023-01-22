@@ -1,10 +1,13 @@
 <?php
 
-session_start();
+if(!isset($_SESSION))
+{
+  session_start();
+}
 
 include 'dbconnect.php';
 
-if($_POST['email'] && $_POST['password'])
+if(isset($_POST['email']) && isset($_POST['password']))
 {
     $conn = dbconnect();
     if(!$conn)
@@ -24,11 +27,17 @@ if($_POST['email'] && $_POST['password'])
         }
         header("Location: ../welcome.php");
       } else {
+        $_SESSION['agency'] = 0;
         $_SESSION['loginSuccess'] = false;
         header("Location: ../login.php");
       }
       
       $conn->close();
+}
+else
+{
+  $_SESSION['loginSuccess'] = false;
+  header('Location: ../login.php');
 }
 
 ?>

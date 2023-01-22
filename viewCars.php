@@ -2,7 +2,7 @@
 
 session_start();
 
-if(isset($_SESSION['loginSuccess']))
+if(isset($_SESSION['loginSuccess']) && $_SESSION['loginSuccess'] == true)
 {
     if($_SESSION['agency'] == 1)
     {
@@ -77,7 +77,7 @@ $result = returnCars();
 
                                                 <?php
 
-                                                if(isset($_SESSION['loginSuccess']))
+                                                if(isset($_SESSION['loginSuccess']) && $_SESSION['loginSuccess'] == true)
                                                 {
                                                 ?>
                                                 <form action="query/dbLeased.php" method="POST">

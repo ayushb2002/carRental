@@ -1,4 +1,9 @@
 window.onload = () => {
+
+    setTimeout(() => {
+        document.querySelector('.build-toast').classList.add('display-none');
+    }, 3000);
+
     if (document.querySelector('#login')) {
         document.querySelector('#btn-user-login').onclick = () => {
             document.querySelector('#agencyLogin').classList.add('display-none');
